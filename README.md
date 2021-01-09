@@ -1,3 +1,3 @@
 # PerformanceTests
 
-Test commit
+A repository for misc .Net performance tests and benchmarks
