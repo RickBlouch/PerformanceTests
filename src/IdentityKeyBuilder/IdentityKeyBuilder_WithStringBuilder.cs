@@ -50,7 +50,7 @@ namespace IdentityKeyBuilder
 
             var identityKey = identityKeyBuilder.ToString();
 
-            if (identityKey.Length > 250) { return (null, $"IdentityKey cannot be more than 250 characters."); }
+            if (identityKey.Length > 1000) { return (null, $"IdentityKey cannot be more than 1000 characters."); }
 
             return (identityKeyBuilder.ToString(), null);
         }

@@ -10,14 +10,14 @@ namespace IdentityKeyBuilderTests
     // Test that update key property is built correctly without each property once
     // Test that update key is built with all properties
 
-    public class IdentityKeyBuilder_WithSpanTests
+    public class IdentityKeyBuilder_WithSpan_NoLengthCalcTests_NoLengthCalc
     {
         [Fact]
         public void BuildIdentityKey_ReturnsError_WhennullRequirements()
         {
             var props = new IdentityKeyProperties("", "", "", null);
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, null);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, null);
 
             Assert.NotNull(result.ErrorMessage);
             Assert.Null(result.IdentityKey);
@@ -29,7 +29,7 @@ namespace IdentityKeyBuilderTests
             var requirements = new List<IdentityKeyProperty>();
             var props = new IdentityKeyProperties("", "", "", null);
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
             Assert.Null(result.IdentityKey);
@@ -41,7 +41,7 @@ namespace IdentityKeyBuilderTests
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber, IdentityKeyProperty.SystemCode, IdentityKeyProperty.ExternalId };
             var props = new IdentityKeyProperties(new string('0', 400), new string('0', 400), new string('0', 201), null);
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
             Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
@@ -54,7 +54,7 @@ namespace IdentityKeyBuilderTests
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber };
             var props = new IdentityKeyProperties(new string('0', 1001), null, null, null);
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
             Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
@@ -67,7 +67,7 @@ namespace IdentityKeyBuilderTests
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.SystemCode };
             var props = new IdentityKeyProperties(null, new string('0', 1001), null, null);
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
             Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
@@ -80,7 +80,7 @@ namespace IdentityKeyBuilderTests
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.ExternalId };
             var props = new IdentityKeyProperties(null, null, new string('0', 1001), null);
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
             Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
@@ -93,7 +93,7 @@ namespace IdentityKeyBuilderTests
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber, IdentityKeyProperty.SystemCode, IdentityKeyProperty.ExternalId, IdentityKeyProperty.ServiceDate };
             var props = new IdentityKeyProperties(new string('0', 400), new string('0', 400), new string('0', 189), DateTime.Parse("10/19/2019"));
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);
@@ -116,7 +116,7 @@ namespace IdentityKeyBuilderTests
             var props = new IdentityKeyProperties(accountNumber, systemCode, externalId, serviceDate);
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber, IdentityKeyProperty.SystemCode, IdentityKeyProperty.ExternalId, IdentityKeyProperty.ServiceDate };
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.IdentityKey);
             Assert.NotNull(result.ErrorMessage);
@@ -129,7 +129,7 @@ namespace IdentityKeyBuilderTests
             var props = new IdentityKeyProperties("AccountNumber", "SystemCode", "ExternalId", DateTime.Parse("11/19/2019"));
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.SystemCode, IdentityKeyProperty.AccountNumber, IdentityKeyProperty.ExternalId, IdentityKeyProperty.ServiceDate };
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);
@@ -142,7 +142,7 @@ namespace IdentityKeyBuilderTests
             var props = new IdentityKeyProperties("AccountNumber", "SystemCode", "ExternalId", DateTime.Parse("11/19/2019"));
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.SystemCode, IdentityKeyProperty.ExternalId, IdentityKeyProperty.ServiceDate };
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);
@@ -155,7 +155,7 @@ namespace IdentityKeyBuilderTests
             var props = new IdentityKeyProperties("AccountNumber", "SystemCode", "ExternalId", DateTime.Parse("11/19/2019"));
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.ServiceDate, IdentityKeyProperty.AccountNumber, IdentityKeyProperty.ExternalId };
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);
@@ -168,7 +168,7 @@ namespace IdentityKeyBuilderTests
             var props = new IdentityKeyProperties("AccountNumber", "SystemCode", "ExternalId", DateTime.Parse("11/19/2019"));
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.SystemCode, IdentityKeyProperty.AccountNumber, IdentityKeyProperty.ServiceDate };
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);
@@ -181,7 +181,7 @@ namespace IdentityKeyBuilderTests
             var props = new IdentityKeyProperties("AccountNumber", "SystemCode", "ExternalId", DateTime.Parse("11/19/2019"));
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.SystemCode, IdentityKeyProperty.AccountNumber, IdentityKeyProperty.ExternalId };
 
-            var result = IdentityKeyBuilder_WithSpan.BuildIdentityKey(props, requirements);
+            var result = IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);

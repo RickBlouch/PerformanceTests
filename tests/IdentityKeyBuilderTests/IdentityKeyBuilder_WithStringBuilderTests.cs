@@ -36,68 +36,68 @@ namespace IdentityKeyBuilderTests
         }
 
         [Fact]
-        public void BuildIdentityKey_ReturnsError_WhenIdentityKeyLength_GreaterThan250()
+        public void BuildIdentityKey_ReturnsError_WhenIdentityKeyLength_GreaterThan1000()
         {
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber, IdentityKeyProperty.SystemCode, IdentityKeyProperty.ExternalId };
-            var props = new IdentityKeyProperties(new string('0', 100), new string('0', 100), new string('0', 51), null);
+            var props = new IdentityKeyProperties(new string('0', 400), new string('0', 400), new string('0', 201), null);
 
             var result = IdentityKeyBuilder_WithStringBuilder.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
-            Assert.Contains("cannot be more than 250 characters", result.ErrorMessage);
+            Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
             Assert.Null(result.IdentityKey);
         }
 
         [Fact]
-        public void BuildIdentityKey_ReturnsError_WhenAccountNumberLength_Is250()
+        public void BuildIdentityKey_ReturnsError_WhenAccountNumberLength_Is1000()
         {
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber };
-            var props = new IdentityKeyProperties(new string('0', 251), null, null, null);
+            var props = new IdentityKeyProperties(new string('0', 1001), null, null, null);
 
             var result = IdentityKeyBuilder_WithStringBuilder.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
-            Assert.Contains("cannot be more than 250 characters", result.ErrorMessage);
+            Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
             Assert.Null(result.IdentityKey);
         }
 
         [Fact]
-        public void BuildIdentityKey_ReturnsError_WhenSystemCodeLength_is250()
+        public void BuildIdentityKey_ReturnsError_WhenSystemCodeLength_is1000()
         {
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.SystemCode };
-            var props = new IdentityKeyProperties(null, new string('0', 251), null, null);
+            var props = new IdentityKeyProperties(null, new string('0', 1001), null, null);
 
             var result = IdentityKeyBuilder_WithStringBuilder.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
-            Assert.Contains("cannot be more than 250 characters", result.ErrorMessage);
+            Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
             Assert.Null(result.IdentityKey);
         }
 
         [Fact]
-        public void BuildIdentityKey_ReturnsError_WhenExternalIdLength_is250()
+        public void BuildIdentityKey_ReturnsError_WhenExternalIdLength_is1000()
         {
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.ExternalId };
-            var props = new IdentityKeyProperties(null, null, new string('0', 251), null);
+            var props = new IdentityKeyProperties(null, null, new string('0', 1001), null);
 
             var result = IdentityKeyBuilder_WithStringBuilder.BuildIdentityKey(props, requirements);
 
             Assert.NotNull(result.ErrorMessage);
-            Assert.Contains("cannot be more than 250 characters", result.ErrorMessage);
+            Assert.Contains("cannot be more than 1000 characters", result.ErrorMessage);
             Assert.Null(result.IdentityKey);
         }
 
         [Fact]
-        public void BuildIdentityKey_IsValid_WhenIdentityKeyLength_Is250()
+        public void BuildIdentityKey_IsValid_WhenIdentityKeyLength_Is1000()
         {
             var requirements = new List<IdentityKeyProperty>() { IdentityKeyProperty.AccountNumber, IdentityKeyProperty.SystemCode, IdentityKeyProperty.ExternalId, IdentityKeyProperty.ServiceDate };
-            var props = new IdentityKeyProperties(new string('0', 100), new string('0', 100), new string('0', 39), DateTime.Parse("10/19/2019"));
+            var props = new IdentityKeyProperties(new string('0', 400), new string('0', 400), new string('0', 189), DateTime.Parse("10/19/2019"));
 
             var result = IdentityKeyBuilder_WithStringBuilder.BuildIdentityKey(props, requirements);
 
             Assert.Null(result.ErrorMessage);
             Assert.NotNull(result.IdentityKey);
-            Assert.Equal(250, result.IdentityKey.Length);
+            Assert.Equal(1000, result.IdentityKey.Length);
         }
 
         [Theory]

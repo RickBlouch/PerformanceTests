@@ -50,5 +50,56 @@ namespace IdentityKeyBuilderBenchmarks
                 IdentityKeyBuilder_WithSpan.BuildIdentityKey(identityKey, _identityKeyRequirements);
             }
         }
+
+        [Benchmark]
+        public void IdentityKey_WithSpan_NoLengthCalc()
+        {
+            foreach (var identityKey in _identityKeyProperties)
+            {
+                IdentityKeyBuilder_WithSpan_NoLengthCalc.BuildIdentityKey(identityKey, _identityKeyRequirements);
+            }
+        }
+
+
+        #region DateTime benchmarks
+
+        //[Benchmark]
+        //public void DateTime_ToString()
+        //{
+        //    Span<char> buffer = stackalloc char[8];
+
+        //    _testDateTime.ToString("yyyyMMdd").AsSpan().CopyTo(buffer);
+        //}
+
+        //private const string _format = "yyyyMMdd";
+        //private static ReadOnlySpan<char> _formatSpan => "yyyyMMdd".AsSpan();
+
+        //[Benchmark]
+        //public void DateTime_ToStringWithConstFormat()
+        //{
+        //    Span<char> buffer = stackalloc char[8];
+
+        //    _testDateTime.ToString(_format).AsSpan().CopyTo(buffer);
+        //}
+
+        //[Benchmark]
+        //public void DateTime_TryFormat() // <--- overall best.  Same results as method below, but more readable
+        //{
+        //    Span<char> buffer = stackalloc char[8];
+
+        //    //_testDateTime.ToString(_format).AsSpan().CopyTo(buffer);
+        //    _testDateTime.TryFormat(buffer, out int charsWritten, "yyyyMMdd");
+        //}
+
+        //[Benchmark]
+        //public void DateTime_TryFormatConstFormat()
+        //{
+        //    Span<char> buffer = stackalloc char[8];
+
+        //    //_testDateTime.ToString(_format).AsSpan().CopyTo(buffer);
+        //    _testDateTime.TryFormat(buffer, out int charsWritten, _formatSpan);
+        //}
+
+        #endregion
     }
 }
